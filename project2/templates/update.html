@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Application Home Page</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.0/normalize.min.css">
+    <link rel="stylesheet" href="/static/css/home.css">
+    <script
+      src="http://code.jquery.com/jquery-3.3.1.min.js"
+      integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+      crossorigin="anonymous">
+    </script>
+</head>
+<body>
+    
+    <div class="container">
+        <h1 class="banner">People Update</h1>
+        
+        <div class="section editor">
+            <form action="/update/{{data.pid}}/" method="POST" >
+            <label for="pid">PId
+                <input name='pid' id="pid" type="text" value="{{data.pid}}" required/>
+            </label>
+            <label for="name">Name
+                    <input  name='name' id="name" type="text" value="{{data.name}}" required/>
+                </label>
+                <br />
+                <label for="ptype">Ptype
+                    <input name='ptype' id="ptype" type="text" value="{{data.ptype}}" required/>
+                </label>
+                <label for="age">Age
+                    <input name='age' id="age" type="text" value="{{data.age}}" required />
+                </label>
+                <br />
+                <label for="desc">Description
+                    <input  name='desc' id="desc" type="text" value="{{data.desc}}" required/>
+                </label>
+            <br />
+                <label for="checked">Checked
+                    <input name="checked" id="checked" type="checkbox" value="on" required/>
+                </label>
+                <button type="submit">Update</button>
+                </form>
+                <a href="/delete/{{data.pid}}"><button>Delete</button></a>
+
+
+            <br />
+        </div>
+        <div class="error">
+        </div>
+    </div>
+</body>
+</html>

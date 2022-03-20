@@ -1,0 +1,181 @@
+openapi: 3.0.3
+info:
+  title: Sample REST APIs using Flask, OpenAPI and Connexion
+  description: Sample REST APIs using Flask, OpenAPI and Connexion
+  version: "1.0.0"
+servers:
+  - url: http://localhost:5000
+    description: Rest Server showing Swagger and Connexion capability
+paths:
+  /people:
+    get:
+      operationId: people.getAll
+      tags:
+        - People
+      summary: Read the entire list of people
+      description: Read the list of people
+      parameters:
+        - name: length
+          in: query
+          type: integer
+          description: Number of people to get from people
+          required: false
+        - name: offset
+          in: query
+          type: integer
+          description: Offset from beginning of list where to start gathering people
+          required: false
+      responses:
+        200:
+          description: Successfully read people list operation
+          schema:
+            type: array
+            items:
+              properties:
+                pid:
+                  type: string
+                name:
+                  type: string
+                ptype:
+                  type: string 
+                age:
+                  type: string
+                desc:
+                  type: string
+                timestamp:
+                  type: string
+            $ref: "#/components/schemas/People"
+
+    post:
+      operationId: people.create
+      tags:
+        - People
+      summary: Create a new People
+      description: Create a new People
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/People"
+      responses:
+        "201":
+          description: People Created successfully
+
+    get:
+      operationId: people.getAll
+      tags: 
+        - People
+      summary: Returns a list of peoples.
+      description: Returns a list of peoples.
+      responses:
+        "200": # status code
+          description: Return the entire list of peoples.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/People"
+    delete:
+      operationId: people.deleteAll
+      tags:
+        - People
+      summary: Delete all People
+      description: Delete all People
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/People"
+      responses:
+        "201":
+          description: People Deleted successfully
+          
+  /people/{pid}:
+    get:
+      operationId: people.get
+      tags:
+        - People
+      summary: Return an People with given ID
+      description: Return an People with given ID
+      parameters:
+        - name: pid
+          in: path
+          description: People ID
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        "200": # status code
+          description: Return an People with given ID
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/People"
+    delete:
+      operationId: people.delete
+      tags:
+        - People
+      summary: Delete an People with given ID
+      description: Delete an People with given ID
+      parameters:
+        - name: pid
+          in: path
+          description: People ID
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        "200": # status code
+          description: Deleted an People with given ID
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/People"
+    put:
+      operationId: people.update
+      tags:
+        - People
+      summary: Update an People with given ID
+      description: Update an People with given ID
+      parameters:
+        - name: pid
+          in: path
+          description: People ID
+          required: true
+          schema:
+            type: integer
+            format: int64
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/People"
+      responses:
+        "200": # status code
+          description: Updated an People with given ID
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/People"
+
+components:
+  schemas:
+    People:
+      type: object
+      properties:
+        pid:
+          type: integer
+          format: int64
+        name:
+          type: string
+        ptype:
+          type: string
+        age:
+          type: number
+        desc:
+          type: string
+        date:
+          type: string
+        check:
+          type: boolean
